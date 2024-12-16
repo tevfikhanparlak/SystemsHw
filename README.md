@@ -22,7 +22,7 @@ Bu, oyuncunun farklı odaları keşfettiği, yaratıklara saldırdığı, eşyal
 ## Oyunu Başlatma
 
 ### Oyunu Başlatma:
-**(initGame) Metodu**  
+** `initGame` Metodu**  
 Oyun dünyasının temel yapılarını ve başlama koşullarını hazırlar. Bu metot, odaları oluşturur, odaların bağlantılarını tanımlar, yaratıkları ve eşyaları yerleştirir. Ayrıca oyuncunun başlangıç odasını ve durumunu belirler.
 
 - **Ne Yapar?**
@@ -39,11 +39,11 @@ Oyun dünyasının temel yapılarını ve başlama koşullarını hazırlar. Bu 
 ## HandleCommand
 
 ### Komutları Yönetme:
-** (handleCommand) Metodu**  
+** `handleCommand` Metodu**  
 Oyuncunun oyun sırasında girdiği komutları işler ve ilgili işlemleri tetikler. Tüm oyun içi etkileşimlerin merkezi bu metod üzerinden sağlanır.
 
 - **Ne Yapar?**
-  - Girilen komutu analiz eder (örneğin: "move", "pickup", "attack").
+  - Girilen komutu analiz eder (örneğin: `move`, `pickup`, `attack`).
   - Komuta uygun metotları çağırır (örneğin: `movePlayer`, `pickupItem`, `lookRoom`).
 
 - **Önemli Noktalar:**
@@ -51,10 +51,9 @@ Oyuncunun oyun sırasında girdiği komutları işler ve ilgili işlemleri tetik
   - Tüm komutlar `handleCommand` metodu içinde bir koşul yapısı ile kontrol edilir.
 
 ---
+## Oynanış
 
-## Hareket Ettirme
-
-### 8. Hareket Ettirme:
+###  Hareket Ettirme:
 **`movePlayer` Metodu**  
 Oyuncunun odalar arasında hareket etmesini sağlar. Hangi yönlere gidilebileceği kontrol edilir ve oyuncunun konumu güncellenir.
 
@@ -71,24 +70,23 @@ Oyuncunun odalar arasında hareket etmesini sağlar. Hangi yönlere gidilebilece
 
 ## Odaya Bakma
 
-### 9. Odaya Bakma:
+### Odaya Bakma:
 **`lookRoom` Metodu**  
 Oyuncunun bulunduğu odanın durumunu incelemesini sağlar. Bu metot, odada bulunan yaratıkları, eşyaları ve odanın genel tanımını oyuncuya bildirir.
 
 - **Ne Yapar?**
-  - Odadaki yaratıkların isimlerini ve durumlarını listeler.
+  - Odadaki yaratığın ismini(varsa) ve durumlarını listeler.
   - Odadaki eşyaların isimlerini listeler.
-  - Odadan çıkış yollarını belirtir (örneğin: "Kapılar: Yukarı, Sağ").
-
+ 
 - **Önemli Noktalar:**
   - Oyuncunun strateji geliştirebilmesi için odanın durumu hakkında detaylı bilgi verilmesi önemlidir.
   - Odadaki yaratıklar ve eşyalar, oyuncunun bir sonraki hareketini etkiler.
 
 ---
 
-## Oynanış
 
-### 1. **Eşya Toplama**  
+
+### **Eşya Toplama**  
 Oyuncu, odalarda bulduğu faydalı eşyaları alarak envanterine ekleyebilir. Bu eşyalar, oyun sırasında ilerlemek veya hayatta kalmak için kritik öneme sahiptir.  
 - **Nasıl Çalışır?**
   - Oyuncu `pickupItem` komutunu yazar.
@@ -102,21 +100,21 @@ Oyuncu, odalarda bulduğu faydalı eşyaları alarak envanterine ekleyebilir. Bu
 
 ---
 
-### 2. **Yaratıklara Saldırma**  
+### **Yaratıklara Saldırma**  
 Odada bulunan düşman yaratıklara saldırarak oyuncu, odadaki tehlikeleri ortadan kaldırabilir. Saldırı için oyuncunun elindeki eşyalar veya çıplak eller kullanılabilir.  
 - **Nasıl Çalışır?**
   - Oyuncu `attackCreature` komutunu yazar.
-  - Odanın yaratık listesi ekrana yazdırılır.
+  - Odanın yaratığı ekrana yazdırılır.
   - Oyuncu saldırmak istediği yaratığı ve kullanmak istediği eşyayı seçer.
   - Eşyaların saldırı gücü, yaratığın sağlık puanını düşürür. Eğer yaratığın sağlık puanı sıfıra düşerse yaratık ölür.
 - **Önemli Noktalar:**
   - Eşyaların saldırı gücü farklıdır. Örneğin, bir kılıç çıplak ele göre daha fazla hasar verir.
-  - Eğer oyuncunun saldırı gücü düşükse yaratıklar karşılık verebilir ve oyuncunun sağlığını azaltabilir.
-  - Bazı güçlü yaratıklar, oyuncudan birden fazla saldırı gerektirir.
+  - Eğer oyuncunun saldırı gücü düşükse yaratıklar oyuncuyu öldürebilir. Burada mantıklı item seçmek önemlidir.
+  
 
 ---
 
-### 3. **Oyuncuyu İyileştirme**  
+### **Oyuncuyu İyileştirme**  
 Oyuncu, savaş sırasında veya sonrasında sağlık eşyalarını kullanarak sağlık puanlarını yenileyebilir. Bu, oyuncunun hayatta kalması için kritik öneme sahiptir.  
 - **Nasıl Çalışır?**
   - Oyuncu `healPlayer` komutunu yazar.
@@ -125,25 +123,28 @@ Oyuncu, savaş sırasında veya sonrasında sağlık eşyalarını kullanarak sa
   - Seçilen eşya kullanıldıktan sonra oyuncunun sağlık puanları yenilenir ve eşya envanterden silinir.
 - **Önemli Noktalar:**
   - Sağlık eşyaları sınırlıdır; dikkatli kullanılmalıdır.
+  - Bir canavarı öldürdükten sonra maksimum 2 adet kullanılabiir. 
   - İyileştirme yalnızca sağlık puanları tam dolmadığında yapılabilir.
   - Eğer sağlık eşyası yoksa oyuncuya uyarı verilir.
 
 ---
 
-### 4. **Envanter Sistemi**  
+### **Envanter Sistemi**  
 Oyuncunun topladığı tüm eşyalar envanterde saklanır. Envanter, sınırlı bir kapasiteye sahiptir, bu nedenle oyuncu yalnızca belirli sayıda eşya taşıyabilir.  
 - **Nasıl Çalışır?**
   - Oyuncu `displayInventory` komutunu yazar.
   - Mevcut envanterdeki eşyaların isimleri ve türleri ekrana yazdırılır.
-  - Oyuncu envanterdeki eşyaları kullanabilir veya bazılarını atarak yer açabilir.
+  - Oyuncu envanterdeki eşyaları kullanabilir.
+  - Sağlık eşyaları kullanıldığında envanterden atılır. Bu da envanterde yer açılmasını sağlar.
 - **Önemli Noktalar:**
   - Envanterdeki eşyaların doğru bir şekilde yönetilmesi gerekir.
-  - Oyuncu gereksiz eşyaları atarak daha önemli eşyalar için yer açabilir.
-  - Kullanılan eşyalar envanterden otomatik olarak silinir.
+  - Oyuncu eşyaları boş yere almamamalı çünkü envanterden sadece sağlık itemi atılır. Saldırı 
+  itemleri envanterden atılmaz.
+ 
 
 ---
 
-### 5. **Kaydetme ve Yükleme**  
+### **Kaydetme ve Yükleme**  
 Oyun ilerlemesini kaydetme ve kaldığınız yerden devam etme imkanı sunar. Bu özellik, özellikle uzun oynanışlar için kullanışlıdır.  
 - **Nasıl Çalışır?**
   - Oyuncu `saveGame` komutunu yazar. Oyun durumu, `savegame.dat` adlı bir dosyaya kaydedilir.
