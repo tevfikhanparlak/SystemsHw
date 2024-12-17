@@ -169,7 +169,7 @@ These methods allow the player to save their progress and continue from where th
 
 ---
 
-## Derleme
+## Compile
 
 Compilation
 To compile the game, you can use the following commands:
