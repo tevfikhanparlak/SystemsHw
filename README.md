@@ -169,9 +169,9 @@ These methods allow the player to save their progress and continue from where th
 
 ---
 
-## Compile
+## Compilation
 
-Compilation
+
 To compile the game, you can use the following commands:
 
 If you're using Makefile to compile the game, you can simply run the following command:
